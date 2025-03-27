@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sports Buddy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation --> 
+        <nav id="navbar">
+            <div class="logo">
+                <i class="fas fa-running"></i>
+                <span>Sports Buddy</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" id="loginBtn" class="active">Login</a>
+                <a href="register.html" id="registerBtn">Register</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Section -->
+        <main id="main-content">
+            <!-- Login Form Section -->
+            <div class="section active">
+                <div class="auth-form">
+                    <h2>Welcome Back!</h2>
+                    <p class="text-center">Login to find your sports partners</p>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <div class="text-right">
+                                <a href="forgot-password.html" class="small-link">Forgot password?</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn primary-btn btn-block">Login</button>
+                        </div>
+                        <div class="divider">
+                            <span>or</span>
+                        </div>
+                        <div class="social-login">
+                            <button type="button" class="btn social-btn google-btn">
+                                <i class="fab fa-google"></i> Continue with Google
+                            </button>
+                            <button type="button" class="btn social-btn facebook-btn">
+                                <i class="fab fa-facebook-f"></i> Continue with Facebook
+                            </button>
+                        </div>
+                        <div class="text-center mt-2">
+                            <p>Don't have an account? <a href="register.html">Sign up</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-running"></i>
+                    <span>Sports Buddy</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sports Buddy. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmDp_P61G-gbqKWw-z4rlA0KNVTM_OHF0",
+            authDomain: "sports-buddy-bae94.firebaseapp.com",
+            projectId: "sports-buddy-bae94",
+            storageBucket: "sports-buddy-bae94.firebasestorage.app",
+            messagingSenderId: "186432814964",
+            appId: "1:186432814964:web:b9272ca364f1b80608f621",
+            measurementId: "G-YQQXRG7ZP8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        });
+    </script>
+</body>
+
+</html>

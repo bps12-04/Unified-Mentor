@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">My Blog</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container">
+        <div class="blog-container">
+            <!-- Blog Posts Section -->
+            <div class="blog-posts">
+                <!-- Post 1 -->
+                <article class="post" data-id="1">
+                    <div class="post-img"><img src="C:\Users\sumit\OneDrive\Desktop\projects\blog\webdevlop.jpeg"
+                            alt="Post Thumbnail"></div>
+                    <div class="post-content">
+                        <div class="post-date">March 20, 2025</div>
+                        <h2 class="post-title">The Future of Web Development</h2>
+                        <div class="post-excerpt">
+                            <p>Web development has evolved dramatically over the past decade. From simple static HTML
+                                pages to complex interactive applications, the journey has been fascinating. What does
+                                the future hold for developers?</p>
+                        </div>
+                        <a href="#" class="read-more" data-id="1">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post" data-id="2">
+                    <div class="post-img"><img src="C:\Users\sumit\OneDrive\Desktop\projects\blog\css.jpeg"
+                            alt="Post Thumbnail"></div>
+                    <div class="post-content">
+                        <div class="post-date">March 15, 2025</div>
+                        <h2 class="post-title">Essential CSS Tips for Beginners</h2>
+                        <div class="post-excerpt">
+                            <p>CSS can be intimidating for beginners, but with a few essential tips and tricks, you can
+                                master the basics quickly. Learn how to structure your stylesheets efficiently and avoid
+                                common pitfalls.</p>
+                        </div>
+                        <a href="#" class="read-more" data-id="2">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post" data-id="3">
+                    <div class="post-img"><img src="C:\Users\sumit\OneDrive\Desktop\projects\blog\frame.jpeg"
+                            alt="Post Thumbnail"></div>
+                    <div class="post-content">
+                        <div class="post-date">March 10, 2025</div>
+                        <h2 class="post-title">JavaScript Frameworks: Which One Should You Choose?</h2>
+                        <div class="post-excerpt">
+                            <p>With so many JavaScript frameworks available today, choosing the right one for your
+                                project can be overwhelming. React, Vue, Angular, Svelte - each has its strengths and
+                                weaknesses. Let's explore them.</p>
+                        </div>
+                        <a href="#" class="read-more" data-id="3">Read More</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Sidebar Section -->
+            <div class="sidebar">
+                <div class="categories">
+                    <h2>Categories</h2>
+                    <ul>
+                        <li><a href="#">Web Development <span>(5)</span></a></li>
+                        <li><a href="#">CSS <span>(3)</span></a></li>
+                        <li><a href="#">JavaScript <span>(7)</span></a></li>
+                        <li><a href="#">Responsive Design <span>(2)</span></a></li>
+                        <li><a href="#">Accessibility <span>(4)</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="recent-posts">
+                    <h2>Recent Posts</h2>
+                    <div class="recent-post">
+                        <div class="recent-post-title">The Future of Web Development</div>
+                        <div class="recent-post-date">March 20, 2025</div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-title">Essential CSS Tips for Beginners</div>
+                        <div class="recent-post-date">March 15, 2025</div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-title">JavaScript Frameworks: Which One Should You Choose?</div>
+                        <div class="recent-post-date">March 10, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Full Posts -->
+    <div class="modal" id="postModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title"></h2>
+            <div class="modal-date"></div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Subscribe to my newsletter for the latest updates</p>
+                <!-- Could add a newsletter form here -->
+            </div>
+            <div class="social-links">
+                <h3>Social Links</h3><br>
+                <div class="social">
+                    <ul>
+                        <li><a href="#"><img src="https://img.icons8.com/color/48/null/facebook-new.png" /></a></li>
+                        <li><a href="#"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png" /></a>
+                        </li>
+                        <li><a href="#"><img src="https://img.icons8.com/color/48/null/twitter--v1.png" /></a></li>
+                        <li><a href="#"><img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" /></a>
+                        </li>
+                        <li><a href="#"><img src="https://img.icons8.com/color/48/null/youtube-play.png" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 My Blog. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPLQ: Efficient Privacy-Preserving Location-Based Query</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>EPLQ: Efficient Privacy-Preserving Location-Based Query</h1>
+            <nav>
+                <div class="nav-container">
+                    <div id="loginOptions" class="login-options">
+                        <button onclick="showLoginForm('admin')">Admin Login</button>
+                        <button onclick="showLoginForm('user')">User Login</button>
+                    </div>
+                    <div id="userNav" class="user-nav hidden">
+                        <span id="userWelcome"></span>
+                        <button onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Authentication Forms -->
+            <div id="authForms" class="auth-forms">
+                <div id="adminLoginForm" class="form-container hidden">
+                    <h2>Admin Login</h2>
+                    <form id="adminLoginFormContent">
+                        <div class="form-group">
+                            <label for="adminEmail">Email:</label>
+                            <input type="email" id="adminEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPassword">Password:</label>
+                            <input type="password" id="adminPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Login</button>
+                            <button type="button" onclick="showAdminRegisterForm()">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="adminRegisterForm" class="form-container hidden">
+                    <h2>Admin Registration</h2>
+                    <form id="adminRegisterFormContent">
+                        <div class="form-group">
+                            <label for="newAdminName">Name:</label>
+                            <input type="text" id="newAdminName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newAdminEmail">Email:</label>
+                            <input type="email" id="newAdminEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newAdminPassword">Password:</label>
+                            <input type="password" id="newAdminPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Register</button>
+                            <button type="button" onclick="showLoginForm('admin')">Back to Login</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="userLoginForm" class="form-container hidden">
+                    <h2>User Login</h2>
+                    <form id="userLoginFormContent">
+                        <div class="form-group">
+                            <label for="userEmail">Email:</label>
+                            <input type="email" id="userEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword">Password:</label>
+                            <input type="password" id="userPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Login</button>
+                            <button type="button" onclick="showUserRegisterForm()">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="userRegisterForm" class="form-container hidden">
+                    <h2>User Registration</h2>
+                    <form id="userRegisterFormContent">
+                        <div class="form-group">
+                            <label for="newUserName">Name:</label>
+                            <input type="text" id="newUserName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserEmail">Email:</label>
+                            <input type="email" id="newUserEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newUserPassword">Password:</label>
+                            <input type="password" id="newUserPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit">Register</button>
+                            <button type="button" onclick="showLoginForm('user')">Back to Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="dashboard hidden">
+                <h2>Admin Dashboard</h2>
+                <div class="dashboard-content">
+                    <div class="upload-section">
+                        <h3>Upload POI Data</h3>
+                        <form id="poiUploadForm">
+                            <div class="form-group">
+                                <label for="poiName">POI Name:</label>
+                                <input type="text" id="poiName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="poiCategory">Category:</label>
+                                <select id="poiCategory">
+                                    <option value="restaurant">Restaurant</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="attraction">Tourist Attraction</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="poiLatitude">Latitude:</label>
+                                <input type="number" id="poiLatitude" step="0.000001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="poiLongitude">Longitude:</label>
+                                <input type="number" id="poiLongitude" step="0.000001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="poiDescription">Description:</label>
+                                <textarea id="poiDescription" rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Encrypt & Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="data-section">
+                        <h3>Uploaded POI Data</h3>
+                        <div id="poiDataList" class="data-list">
+                            <!-- POI data will be listed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Dashboard -->
+            <div id="userDashboard" class="dashboard hidden">
+                <h2>User Dashboard</h2>
+                <div class="dashboard-content">
+                    <div class="search-section">
+                        <h3>Search POIs</h3>
+                        <form id="poiSearchForm">
+                            <div class="form-group">
+                                <label for="userLatitude">Your Latitude:</label>
+                                <input type="number" id="userLatitude" step="0.000001" required>
+                                <button type="button" id="getLocationBtn">Get Current Location</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="userLongitude">Your Longitude:</label>
+                                <input type="number" id="userLongitude" step="0.000001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="searchRadius">Search Radius (km):</label>
+                                <input type="number" id="searchRadius" min="0.1" max="50" step="0.1" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="poiCategoryFilter">Category Filter:</label>
+                                <select id="poiCategoryFilter">
+                                    <option value="all">All Categories</option>
+                                    <option value="restaurant">Restaurant</option>
+                                    <option value="hotel">Hotel</option>
+                                    <option value="attraction">Tourist Attraction</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="results-section">
+                        <h3>Search Results</h3>
+                        <div id="searchResults" class="search-results">
+                            <!-- Search results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Section (Default) -->
+            <div id="homeSection" class="home-section">
+                <div class="project-info">
+                    <h2>About EPLQ</h2>
+                    <p>EPLQ is an efficient and privacy-preserving location-based query solution for spatial range queries. It provides information about Points of Interest (POIs) within a specific distance while protecting user privacy.</p>
+                    
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Predicate-only encryption system for inner product range</li>
+                        <li>Privacy-preserving tree index structure for improved query latency</li>
+                        <li>Secure spatial range queries on encrypted data</li>
+                        <li>Fast query generation (approx. 0.9 seconds) on mobile devices</li>
+                        <li>Efficient POI searching on commodity workstations</li>
+                    </ul>
+                    
+                    <h3>How It Works</h3>
+                    <p>EPLQ allows users to search for nearby points of interest without revealing their exact location to the service provider. The system uses advanced encryption techniques to ensure privacy while maintaining efficiency.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 EPLQ: Efficient Privacy-Preserving Location-Based Query System</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

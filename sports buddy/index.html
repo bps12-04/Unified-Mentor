@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Buddy - Find Your Sports Partner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="logo">
+                <i class="fas fa-running"></i>
+                <span>Sports Buddy</span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <div id="unauthenticatedLinks">
+                    <a href="#" id="loginBtn">Login</a>
+                    <a href="register.html" id="registerBtn">Register</a>
+                </div>
+                <div id="authenticatedLinks" style="display:none">
+                    <a href="#" id="homeLink">Home</a>
+                    <a href="#" id="eventsLink">Events</a>
+                    <a href="#" id="matchesLink">Matches</a>
+                    <a href="#" id="profileLink">Profile</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Section -->
+        <main id="main-content">
+            <!-- Landing Page Content (shown when logged out) -->
+            <div id="landing-page" class="section">
+                <div class="hero">
+                    <h1>Find Your Perfect Sports Partner</h1>
+                    <p>Join the world's largest sports matching community</p>
+                    <button id="get-started-btn" class="btn primary-btn">Get Started</button>
+                </div>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Find Local Sports</h3>
+                        <p>Discover sports events happening near you</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Match with Partners</h3>
+                        <p>Connect with people who share your interests</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3>Any Skill Level</h3>
+                        <p>From beginners to pros, find your perfect match</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-section" class="section" style="display:none">
+                <div class="auth-form">
+                    <h2>Login to Sports Buddy</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn primary-btn">Login</button>
+                        </div>
+                        <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dashboard Section (shown when logged in) -->
+            <div id="dashboard-section" class="section" style="display:none">
+                <div class="dashboard-container">
+                    <header class="dashboard-header">
+                        <div class="user-profile">
+
+                            <div class="user-info">
+                                <h2 id="dashboard-username">John Doe</h2>
+                                <p id="dashboard-member-since">Member since June 2023</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary"><a href="edit profile.html">Profile</a> </button>
+                    </header>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3 id="upcoming-events-count">12</h3>
+                            <p>Upcoming Events</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="attended-events-count">24</h3>
+                            <p>Events Attended</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="sports-played-count">5</h3>
+                            <p>Sports Played</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="friends-count">8</h3>
+                            <p>Friends</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-sections">
+                        <section class="dashboard-card">
+                            <h3>Upcoming Events</h3>
+                            <ul class="upcoming-events" id="upcoming-events-list">
+                                <!-- Events will be loaded dynamically -->
+                            </ul>
+                        </section>
+
+                        <section class="dashboard-card">
+                            <h3>Recent Activity</h3>
+                            <ul class="recent-activity" id="recent-activity-list">
+                                <!-- Activities will be loaded dynamically -->
+                            </ul>
+                        </section>
+
+                        <section class="dashboard-card">
+                            <h3>Your Sports</h3>
+                            <div class="sports-interests" id="user-sports-list">
+                                <!-- Sports will be loaded dynamically -->
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="dashboard-actions">
+                        <button class="btn btn-secondary">Settings</button>
+                        <button class="btn btn-primary">Find New Events</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-running"></i>
+                    <span>Sports Buddy</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sports Buddy. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmDp_P61G-gbqKWw-z4rlA0KNVTM_OHF0",
+            authDomain: "sports-buddy-bae94.firebaseapp.com",
+            projectId: "sports-buddy-bae94",
+            storageBucket: "sports-buddy-bae94.firebasestorage.app",
+            messagingSenderId: "186432814964",
+            appId: "1:186432814964:web:b9272ca364f1b80608f621",
+            measurementId: "G-YQQXRG7ZP8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const loginSection = document.getElementById('login-section');
+        const landingPage = document.getElementById('landing-page');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const unauthenticatedLinks = document.getElementById('unauthenticatedLinks');
+        const authenticatedLinks = document.getElementById('authenticatedLinks');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const getStartedBtn = document.getElementById('get-started-btn');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // Show login form when login button is clicked
+        loginBtn.addEventListener('click', () => {
+            landingPage.style.display = 'none';
+            loginSection.style.display = 'block';
+            dashboardSection.style.display = 'none';
+        });
+
+        // Show landing page when get started button is clicked
+        getStartedBtn.addEventListener('click', () => {
+            landingPage.style.display = 'block';
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+        });
+
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    showDashboard(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        });
+
+        // Logout button
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                // Sign-out successful
+                showUnauthenticatedView();
+            }).catch((error) => {
+                // An error happened
+                alert(error.message);
+            });
+        });
+
+        // Function to show dashboard
+        function showDashboard(user) {
+            // Update UI
+            unauthenticatedLinks.style.display = 'none';
+            authenticatedLinks.style.display = 'block';
+            landingPage.style.display = 'none';
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+
+            // Update user info
+            document.getElementById('dashboard-username').textContent = user.displayName || 'Akash';
+            document.getElementById('dashboard-member-since').textContent = `Member since ${new Date(user.metadata.creationTime).toLocaleDateString()}`;
+
+            // Here you would load the user's data (events, sports, etc.)
+            // For now we'll just show placeholder data
+        }
+
+        // Function to show unauthenticated view
+        function showUnauthenticatedView() {
+            unauthenticatedLinks.style.display = 'block';
+            authenticatedLinks.style.display = 'none';
+            landingPage.style.display = 'block';
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+        }
+
+        // Check auth state on page load
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                showDashboard(user);
+            } else {
+                // User is signed out
+                showUnauthenticatedView();
+            }
+        });
+    </script>
+</body>
+
+</html>

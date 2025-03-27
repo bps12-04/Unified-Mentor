@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Sports Buddy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles specific to edit profile page */
+        .profile-form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-upload {
+            position: relative;
+            margin-right: 2rem;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+        }
+
+        .avatar-upload label {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .avatar-upload input[type="file"] {
+            display: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .sports-selection {
+            margin-top: 1rem;
+        }
+
+        .sports-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .sport-checkbox {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .sport-checkbox input {
+            margin-right: 0.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="logo">
+                <i class="fas fa-running"></i>
+                <span>Sports Buddy</span>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Home</a>
+                <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Section -->
+        <main id="main-content">
+            <div class="profile-form-container">
+                <div class="profile-header">
+                    <div class="avatar-upload">
+                        <img src="https://via.placeholder.com/150" alt="Profile Avatar" class="profile-avatar"
+                            id="profileAvatar">
+                        <label for="avatarInput">
+                            <i class="fas fa-camera"></i>
+                            <input type="file" id="avatarInput" accept="image/*">
+                        </label>
+                    </div>
+                    <div>
+                        <h1>Edit Your Profile</h1>
+                        <p>Update your personal information and sports preferences</p>
+                    </div>
+                </div>
+
+                <form id="editProfileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" value="Akash" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" value="Sharma">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="akash@example.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" value="+91 9876543210">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="delhi">Delhi</option>
+                            <option value="mumbai" selected>Mumbai</option>
+                            <option value="bangalore">Bangalore</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="chennai">Chennai</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio"
+                            placeholder="Tell others about yourself and your sports interests">I'm a passionate sports enthusiast who loves playing basketball and tennis. Looking for regular playing partners in the Mumbai area.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Sports Interests</label>
+                        <div class="sports-selection">
+                            <div class="sports-checkboxes">
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="basketball" checked> Basketball
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="tennis" checked> Tennis
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="football"> Football
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="badminton"> Badminton
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="cricket"> Cricket
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="volleyball"> Volleyball
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="table-tennis"> Table Tennis
+                                </label>
+                                <label class="sport-checkbox">
+                                    <input type="checkbox" name="sports" value="swimming"> Swimming
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skillLevel">Your Skill Level</label>
+                        <select id="skillLevel">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate" selected>Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <select id="availability" multiple>
+                            <option value="weekday-mornings">Weekday Mornings</option>
+                            <option value="weekday-evenings" selected>Weekday Evenings</option>
+                            <option value="weekends" selected>Weekends</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-running"></i>
+                    <span>Sports Buddy</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sports Buddy. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-storage.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmDp_P61G-gbqKWw-z4rlA0KNVTM_OHF0",
+            authDomain: "sports-buddy-bae94.firebaseapp.com",
+            projectId: "sports-buddy-bae94",
+            storageBucket: "sports-buddy-bae94.appspot.com",
+            messagingSenderId: "186432814964",
+            appId: "1:186432814964:web:b9272ca364f1b80608f621",
+            measurementId: "G-YQQXRG7ZP8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // DOM elements
+        const logoutBtn = document.getElementById('logoutBtn');
+        const editProfileForm = document.getElementById('editProfileForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const avatarInput = document.getElementById('avatarInput');
+        const profileAvatar = document.getElementById('profileAvatar');
+
+        // Load user profile data
+        async function loadProfileData() {
+            const user = auth.currentUser;
+            if (user) {
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    // Populate form fields with user data
+                    document.getElementById('firstName').value = userData.firstName || '';
+                    document.getElementById('lastName').value = userData.lastName || '';
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('phone').value = userData.phone || '';
+                    document.getElementById('location').value = userData.location || 'mumbai';
+                    document.getElementById('bio').value = userData.bio || '';
+                    document.getElementById('skillLevel').value = userData.skillLevel || 'intermediate';
+
+                    // Set sports interests
+                    if (userData.sports) {
+                        document.querySelectorAll('input[name="sports"]').forEach(checkbox => {
+                            checkbox.checked = userData.sports.includes(checkbox.value);
+                        });
+                    }
+
+                    // Set availability
+                    if (userData.availability) {
+                        const availabilitySelect = document.getElementById('availability');
+                        Array.from(availabilitySelect.options).forEach(option => {
+                            option.selected = userData.availability.includes(option.value);
+                        });
+                    }
+
+                    // Set profile picture if available
+                    if (userData.photoURL) {
+                        profileAvatar.src = userData.photoURL;
+                    }
+                }
+            }
+        }
+
+        // Handle avatar upload
+        avatarInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                try {
+                    const user = auth.currentUser;
+                    const storageRef = ref(storage, `profile-pictures/${user.uid}`);
+                    await uploadBytes(storageRef, file);
+                    const downloadURL = await getDownloadURL(storageRef);
+
+                    // Update profile picture display
+                    profileAvatar.src = downloadURL;
+
+                    // Update in Firestore
+                    const userRef = doc(db, "users", user.uid);
+                    await setDoc(userRef, { photoURL: downloadURL }, { merge: true });
+
+                    alert('Profile picture updated successfully!');
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    alert('Failed to upload profile picture. Please try again.');
+                }
+            }
+        });
+
+        // Handle form submission
+        editProfileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    // Get all selected sports
+                    const selectedSports = Array.from(document.querySelectorAll('input[name="sports"]:checked'))
+                        .map(checkbox => checkbox.value);
+
+                    // Get all selected availability options
+                    const availabilitySelect = document.getElementById('availability');
+                    const selectedAvailability = Array.from(availabilitySelect.selectedOptions)
+                        .map(option => option.value);
+
+                    // Prepare user data
+                    const userData = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        phone: document.getElementById('phone').value,
+                        location: document.getElementById('location').value,
+                        bio: document.getElementById('bio').value,
+                        sports: selectedSports,
+                        skillLevel: document.getElementById('skillLevel').value,
+                        availability: selectedAvailability,
+                        updatedAt: new Date()
+                    };
+
+                    // Save to Firestore
+                    const userRef = doc(db, "users", user.uid);
+                    await setDoc(userRef, userData, { merge: true });
+
+                    alert('Profile updated successfully!');
+                    window.location.href = 'profile.html';
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    alert('Failed to update profile. Please try again.');
+                }
+            }
+        });
+
+        // Cancel button
+        cancelBtn.addEventListener('click', () => {
+            window.location.href = 'profile.html';
+        });
+
+        // Logout button
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                alert(error.message);
+            });
+        });
+
+        // Check auth state on page load
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, load their profile data
+                loadProfileData();
+            } else {
+                // User is signed out, redirect to login
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

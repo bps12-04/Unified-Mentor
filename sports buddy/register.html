@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Sports Buddy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="logo">
+                <i class="fas fa-running"></i>
+                <span>Sports Buddy</span>
+            </div>
+            <div class="nav-links">
+                <a href="login.html" id="loginBtn">Login</a>
+                <a href="#" id="registerBtn" class="active">Register</a>
+            </div>
+        </nav>
+
+        <!-- Main Content Section -->
+        <main id="main-content">
+            <!-- Registration Form Section -->
+            <div class="section active">
+                <div class="auth-form">
+                    <h2>Join Sports Buddy</h2>
+                    <p class="text-center">Create your account to find sports partners</p>
+                    
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" placeholder="Create a password" required>
+                            <div class="password-hint">
+                                <small>Use 8+ characters with a mix of letters, numbers & symbols</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sportInterests">Sports Interests (Select at least one)</label>
+                            <div class="sports-checkboxes">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="basketball" name="sportInterests" value="basketball">
+                                    <label for="basketball">Basketball</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="football" name="sportInterests" value="football">
+                                    <label for="football">Football</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="tennis" name="sportInterests" value="tennis">
+                                    <label for="tennis">Tennis</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="running" name="sportInterests" value="running">
+                                    <label for="running">Running</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="swimming" name="sportInterests" value="swimming">
+                                    <label for="swimming">Swimming</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="terms-agreement">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn primary-btn btn-block">Create Account</button>
+                        </div>
+                        <div class="text-center mt-2">
+                            <p>Already have an account? <a href="login.html">Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-running"></i>
+                    <span>Sports Buddy</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sports Buddy. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmDp_P61G-gbqKWw-z4rlA0KNVTM_OHF0",
+            authDomain: "sports-buddy-bae94.firebaseapp.com",
+            projectId: "sports-buddy-bae94",
+            storageBucket: "sports-buddy-bae94.firebasestorage.app",
+            messagingSenderId: "186432814964",
+            appId: "1:186432814964:web:b9272ca364f1b80608f621",
+            measurementId: "G-YQQXRG7ZP8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Registration form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+            
+            // Get selected sports interests
+            const sportCheckboxes = document.querySelectorAll('input[name="sportInterests"]:checked');
+            const sportsInterests = Array.from(sportCheckboxes).map(cb => cb.value);
+            
+            if (sportsInterests.length === 0) {
+                alert("Please select at least one sport interest");
+                return;
+            }
+
+            try {
+                // Create user with email and password
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Save additional user data to Firestore
+                await addDoc(collection(db, "users"), {
+                    uid: user.uid,
+                    name: name,
+                    email: email,
+                    sportsInterests: sportsInterests,
+                    createdAt: new Date()
+                });
+                
+                // Redirect to dashboard after successful registration
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            }
+        });
+    </script>
+</body>
+
+</html>
